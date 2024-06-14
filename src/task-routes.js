@@ -20,6 +20,8 @@ const getNextId = () => {
 }
 
 router.get('/', (req, res) => {
+    /*  #swagger.tags = ['Task']
+        #swagger.description = 'Endpoint to get the list of tasks.' */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
@@ -36,6 +38,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
+    /*  #swagger.tags = ['Task']
+        #swagger.description = 'Endpoint to get a task by ID.'
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'ID of the task.',
+            required: true,
+            type: 'integer'
+        } */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
@@ -50,6 +60,19 @@ router.get('/:id', (req, res) => {
 })
 
 router.post('/', (req, res) => {
+    /*  #swagger.tags = ['Task']
+        #swagger.description = 'Endpoint to add a new task.'
+        #swagger.parameters['task'] = {
+            in: 'body',
+            description: 'Details of the task to add.',
+            required: true,
+            schema: {
+                Titel: 'Task title',
+                Beschreibung: 'Task description',
+                DueDate: '2024-12-31',
+                ResolvedDate: '2024-11-30'
+            }
+        } */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
 
@@ -72,6 +95,25 @@ router.post('/', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
+    /*  #swagger.tags = ['Task']
+        #swagger.description = 'Endpoint to update a task.'
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'ID of the task.',
+            required: true,
+            type: 'integer'
+        }
+        #swagger.parameters['task'] = {
+            in: 'body',
+            description: 'Updated details of the task.',
+            required: true,
+            schema: {
+                Titel: 'Updated task title',
+                Beschreibung: 'Updated task description',
+                DueDate: '2024-12-31',
+                ResolvedDate: '2024-11-30'
+            }
+        } */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
@@ -99,6 +141,22 @@ router.put('/:id', (req, res) => {
 })
 
 router.patch('/:id', (req, res) => {
+    /*  #swagger.tags = ['Task']
+    #swagger.description = 'Endpoint to partially update a task.'
+    #swagger.parameters['id'] = {
+        in: 'path',
+        description: 'ID of the task.',
+        required: true,
+        type: 'integer'
+    }
+    #swagger.parameters['task'] = {
+        in: 'body',
+        description: 'Details of the task to update.',
+        required: true,
+        schema: {
+            Titel: 'Updated task title'
+        }
+    } */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
@@ -122,6 +180,14 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
+    /*  #swagger.tags = ['Task']
+        #swagger.description = 'Endpoint to delete a task by ID.'
+        #swagger.parameters['id'] = {
+            in: 'path',
+            description: 'ID of the task.',
+            required: true,
+            type: 'integer'
+        } */
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }

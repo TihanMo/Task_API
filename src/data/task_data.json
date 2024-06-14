@@ -1,0 +1,22 @@
+[
+  {"Id":1,"Titel":"Bericht erstellen","Beschreibung":"Erstellung des monatlichen Berichts","DueDate":"8/29/2023","ResolvedDate":"4/1/2024"},
+  {"Id":2,"Titel":"Kundentreffen vorbereiten","Beschreibung":"Vorbereitung für das Treffen mit dem Kunden","DueDate":"11/24/2023","ResolvedDate":"6/3/2024"},
+  {"Id":3,"Titel":"Website-Update","Beschreibung":"Aktualisierung der Firmen-Website","DueDate":"1/4/2024","ResolvedDate":"4/25/2024"},
+  {"Id":4,"Titel":"Marketingplan erstellen","Beschreibung":"Erstellung eines neuen Marketingplans","DueDate":"12/1/2023","ResolvedDate":"6/11/2024"},
+  {"Id":5,"Titel":"Rechnungen prüfen","Beschreibung":"Prüfung aller eingehenden Rechnungen","DueDate":"11/8/2023","ResolvedDate":"9/5/2023"},
+  {"Id":6,"Titel":"Produktpräsentation","Beschreibung":"Vorbereitung einer Präsentation für ein neues Produkt","DueDate":"1/9/2024","ResolvedDate":"5/19/2024"},
+  {"Id":7,"Titel":"Jahresbericht","Beschreibung":"Zusammenstellung des Jahresberichts","DueDate":"4/1/2024","ResolvedDate":"10/11/2023"},
+  {"Id":8,"Titel":"Budgetplanung","Beschreibung":"Erstellung des Budgets für das nächste Quartal","DueDate":"7/5/2023","ResolvedDate":"6/28/2023"},
+  {"Id":9,"Titel":"Team-Meeting","Beschreibung":"Durchführung eines Team-Meetings","DueDate":"3/28/2024","ResolvedDate":"6/23/2023"},
+  {"Id":10,"Titel":"Datenanalyse","Beschreibung":"Analyse der aktuellen Verkaufsdaten","DueDate":"9/9/2023","ResolvedDate":"10/5/2023"},
+  {"Id":11,"Titel":"Kampagnenbewertung","Beschreibung":"Bewertung der letzten Marketingkampagne","DueDate":"12/26/2023","ResolvedDate":"5/28/2024"},
+  {"Id":12,"Titel":"Feedback einholen","Beschreibung":"Einholung von Kundenfeedback","DueDate":"11/19/2023","ResolvedDate":"1/16/2024"},
+  {"Id":13,"Titel":"Personalplanung","Beschreibung":"Planung der Personalbedarfe für das nächste Jahr","DueDate":"6/6/2024","ResolvedDate":"6/23/2023"},
+  {"Id":14,"Titel":"Buchhaltung prüfen","Beschreibung":"Überprüfung der Buchhaltungsunterlagen","DueDate":"1/16/2024","ResolvedDate":"8/9/2023"},
+  {"Id":15,"Titel":"Projektmanagement","Beschreibung":"Verwaltung eines neuen Projekts","DueDate":"5/20/2024","ResolvedDate":"2/19/2024"},
+  {"Id":16,"Titel":"Content-Erstellung","Beschreibung":"Erstellung von Inhalten für den Blog","DueDate":"11/29/2023","ResolvedDate":"6/7/2024"},
+  {"Id":17,"Titel":"Vertriebsstrategie","Beschreibung":"Entwicklung einer neuen Vertriebsstrategie","DueDate":"7/6/2023","ResolvedDate":"10/17/2023"},
+  {"Id":18,"Titel":"Eventplanung","Beschreibung":"Planung eines Firmenevents","DueDate":"4/21/2024","ResolvedDate":"10/8/2023"},
+  {"Id":19,"Titel":"Kundensupport","Beschreibung":"Bearbeitung von Kundenanfragen","DueDate":"6/17/2023","ResolvedDate":"8/25/2023"},
+  {"Id":20,"Titel":"Marktanalyse","Beschreibung":"Durchführung einer Marktanalyse","DueDate":"6/27/2023","ResolvedDate":"2/5/2024"}
+]

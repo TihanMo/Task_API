@@ -19,16 +19,6 @@ const getNextId = () => {
     }
 }
 
-/*
-const userAuth = (req, res, next) => {
-    console.log('User in session:', req.session.user)
-    if (req.session.user == null) {
-        return res.sendStatus(403)
-    }
-    next()
-}
-*/
-
 router.get('/', (req, res) => {
     if (req.session.user == null) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })

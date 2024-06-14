@@ -79,4 +79,13 @@ app.delete('/logout', (req, res) => {
 app.use('/tasks', taskRoutes)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
+app.use((res) => {
+    res.status(404).json({ error: 'Endpoint not found' })
+})
+
+app.use((err, req, res) => {
+    console.error(err.stack)
+    res.status(500).json({ error: 'Something went wrong!' })
+})
+
 app.listen(port, ()=>console.log(`Server listening on port ${port}`))

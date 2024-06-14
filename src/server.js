@@ -58,7 +58,7 @@ app.get('/verify', (req, res) => {
     if (req.session.user != null) {
         res.status(200).send(`User ${req.session.user} is logged in`)
     } else {
-        res.status(401).send('User not logged in')
+        res.status(200).send('User not logged in')
     }
 })
 

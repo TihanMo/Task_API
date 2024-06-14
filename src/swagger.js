@@ -3,7 +3,7 @@ const swaggerAutogen = require('swagger-autogen')()
 const doc = {
     info: {
         title: 'Task API',
-        description: 'Dokumentation für alle Endpunkte der Task API'
+        description: 'Documentation for all endpoints of \'Task API\''
     },
     host: 'localhost:3000',
     schemes: ['http'],

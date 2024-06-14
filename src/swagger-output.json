@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Task API",
-    "description": "Dokumentation für alle Endpunkte der Task API",
+    "description": "Documentation for all endpoints of 'Task API'",
     "version": "1.0.0"
   },
   "host": "localhost:3000",
@@ -106,6 +106,9 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "500": {
             "description": "Internal Server Error"

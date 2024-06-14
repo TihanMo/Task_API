@@ -89,7 +89,10 @@
     },
     "/tasks/": {
       "get": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to get the list of tasks.",
         "parameters": [
           {
             "name": "id",
@@ -110,25 +113,34 @@
         }
       },
       "post": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to add a new task.",
         "parameters": [
           {
-            "name": "body",
+            "name": "task",
             "in": "body",
+            "description": "Details of the task to add.",
+            "required": true,
             "schema": {
               "type": "object",
               "properties": {
                 "Titel": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Task title"
                 },
                 "Beschreibung": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "Task description"
                 },
                 "DueDate": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2024-12-31"
                 },
                 "ResolvedDate": {
-                  "example": "any"
+                  "type": "string",
+                  "example": "2024-11-30"
                 }
               }
             }
@@ -141,8 +153,8 @@
           "403": {
             "description": "Forbidden"
           },
-          "406": {
-            "description": "Not Acceptable"
+          "422": {
+            "description": "Unprocessable Entity"
           },
           "500": {
             "description": "Internal Server Error"
@@ -152,13 +164,17 @@
     },
     "/tasks/{id}": {
       "get": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to get a task by ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID of the task."
           }
         ],
         "responses": {
@@ -174,13 +190,44 @@
         }
       },
       "put": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to update a task.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID of the task."
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "description": "Updated details of the task.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Titel": {
+                  "type": "string",
+                  "example": "Updated task title"
+                },
+                "Beschreibung": {
+                  "type": "string",
+                  "example": "Updated task description"
+                },
+                "DueDate": {
+                  "type": "string",
+                  "example": "2024-12-31"
+                },
+                "ResolvedDate": {
+                  "type": "string",
+                  "example": "2024-11-30"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -202,13 +249,32 @@
         }
       },
       "patch": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to partially update a task.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID of the task."
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "description": "Details of the task to update.",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Titel": {
+                  "type": "string",
+                  "example": "Updated task title"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -227,13 +293,17 @@
         }
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Task"
+        ],
+        "description": "Endpoint to delete a task by ID.",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "description": "ID of the task."
           }
         ],
         "responses": {

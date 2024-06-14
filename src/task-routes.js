@@ -22,19 +22,25 @@ const getNextId = () => {
 router.get('/', (req, res) => {
     /*  #swagger.tags = ['Task']
         #swagger.description = 'Endpoint to get the list of tasks.' */
-    if (req.session.user == null) {
-        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
-    }
-    const id = parseInt(req.query.id)
-
-    if (!tasks) {
-        return res.status(500).send('Internal server error')
-    }
-    if (id){
-        const task = tasks.find(t => t.Id === id)
-        return res.status(200).json(task)
-    }
-    res.status(200).json(tasks)
+        if (!req.session.user) {
+            return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+        }
+    
+        const id = parseInt(req.query.id)
+    
+        if (!tasks) {
+            return res.status(500).send('Internal server error')
+        }
+    
+        if (id) {
+            const task = tasks.find(t => t.Id === id)
+            if (task) {
+                return res.status(200).json(task)
+            } else {
+                return res.status(404).json({ error: 'Task not found' })
+            }
+        }
+        res.status(200).json(tasks)
 })
 
 router.get('/:id', (req, res) => {
@@ -46,7 +52,7 @@ router.get('/:id', (req, res) => {
             required: true,
             type: 'integer'
         } */
-    if (req.session.user == null) {
+    if (!req.session.user) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
     const id = parseInt(req.params.id)
@@ -73,7 +79,7 @@ router.post('/', (req, res) => {
                 ResolvedDate: '2024-11-30'
             }
         } */
-    if (req.session.user == null) {
+    if (!req.session.user) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
 
     }
@@ -114,7 +120,7 @@ router.put('/:id', (req, res) => {
                 ResolvedDate: '2024-11-30'
             }
         } */
-    if (req.session.user == null) {
+    if (!req.session.user) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
     const updatedTask = req.body
@@ -157,7 +163,7 @@ router.patch('/:id', (req, res) => {
             Titel: 'Updated task title'
         }
     } */
-    if (req.session.user == null) {
+    if (!req.session.user) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
     const id = parseInt(req.params.id)
@@ -188,7 +194,7 @@ router.delete('/:id', (req, res) => {
             required: true,
             type: 'integer'
         } */
-    if (req.session.user == null) {
+    if (!req.session.user) {
         return res.status(403).json({ error: 'Forbidden: User not authenticated' })
     }
     const id = parseInt(req.params.id)

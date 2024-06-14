@@ -68,10 +68,10 @@ app.delete('/logout', (req, res) => {
         #swagger.description = 'Endpoint to logout a user.' } */
     req.session.destroy((err) => {
         if (err) {
-        console.error('Error destroying session:', err)
-        res.sendStatus(500)
+            console.error('Error destroying session:', err)
+            res.status(500).send('Failed to logout')
         } else {
-        res.status(204).send('Logged out successfully')
+            res.status(204).send('Logged out successfully')
         }
     })
 })
@@ -79,11 +79,11 @@ app.delete('/logout', (req, res) => {
 app.use('/tasks', taskRoutes)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
-app.use((res) => {
+app.use((req, res, next) => {
     res.status(404).json({ error: 'Endpoint not found' })
 })
 
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
     console.error(err.stack)
     res.status(500).json({ error: 'Something went wrong!' })
 })

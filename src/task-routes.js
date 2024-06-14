@@ -19,8 +19,16 @@ const getNextId = () => {
     }
 }
 
-router.get('/', (req, res) => {
-    const id = parseInt(req.query.id, 10)
+const userAuth = (req, res, next) => {
+    if (req.session.user == null) {
+        return res.sendStatus(403);
+    }
+    next()
+}
+
+router.get('/', userAuth, (req, res) => {
+
+    const id = parseInt(req.query.id)
 
     if (!tasks) {
         return res.status(500).send('Internal server error')
@@ -32,8 +40,8 @@ router.get('/', (req, res) => {
     res.status(200).json(tasks)
 })
 
-router.get('/:id', (req, res) => {
-    const id = parseInt(req.params.id, 10)
+router.get('/:id', userAuth, (req, res) => {
+    const id = parseInt(req.params.id)
     const task = tasks.find(t => t.Id === id)
 
     if(task){
@@ -43,7 +51,7 @@ router.get('/:id', (req, res) => {
     }
 })
 
-router.post('/', (req, res) => {
+router.post('/', userAuth, (req, res) => {
     const newTask = req.body
 
     if (!newTask.Titel || !newTask.Beschreibung || !newTask.DueDate || !newTask.ResolvedDate){
@@ -61,16 +69,71 @@ router.post('/', (req, res) => {
     }
 })
 
-router.put('/', (req, res) => {
+router.put('/:id', userAuth, (req, res) => {
+    const updatedTask = req.body
+    const id = parseInt(req.params.id)
 
+    if (!updatedTask || !id) {
+        return res.sendStatus(400).send('Pls provide Task in body')
+    }
+
+    const taskIndex = tasks.findIndex(t => t.Id === id)
+
+    if (taskIndex === -1) {
+        return res.send(404).send('Task not found')
+    }
+
+    tasks[taskIndex] = { Id: id, ...updatedTask }
+
+    try {
+        fs.writeFileSync(__dirname + '/data/task_data.json', JSON.stringify(tasks, null, 2))
+        res.status(201).send(`${updatedTask.Titel} has been updated`)
+    } catch (error) {
+        res.status(500).send('Error while writing tasks')
+    }
 })
 
-router.patch('/', (req, res) => {
-    
+router.patch('/:id', userAuth, (req, res) => {
+    const id = parseInt(req.params.id)
+    const updatedFields = req.body
+    const taskIndex = tasks.findIndex(t => t.Id === id)
+
+    if (taskIndex === -1) {
+        return res.status(404).send('Task not found')
+    }
+
+    const updatedTask = { ...tasks[taskIndex], ...updatedFields }
+    tasks[taskIndex] = updatedTask
+
+    try {
+        fs.writeFileSync(__dirname + '/data/task_data.json', JSON.stringify(tasks, null, 2))
+        res.status(200).send(`${updatedTask.Titel} has been updated`)
+    } catch (error) {
+        res.status(500).send('Error while writing tasks')
+    }
 })
 
-router.delete('/', (req, res) => {
-    
+router.delete('/:id', userAuth, (req, res) => {
+    const id = parseInt(req.params.id)
+
+    if (!id) {
+        return res.sendStatus(400).send('Pls provide id')
+    }
+
+    const taskIndex = tasks.findIndex(t => t.Id === id)
+
+    if (taskIndex === -1) {
+        return res.send(404).send('Task not found')
+    }
+
+    tasks.splice(taskIndex, 1)
+
+    try {
+        fs.writeFileSync(__dirname + '/data/task_data.json', JSON.stringify(tasks, null, 2))
+        res.status(204).send(`Task has been deleted`)
+    } catch (error) {
+        res.status(500).send('Error while writing tasks')
+    }
 })
 
 module.exports = router

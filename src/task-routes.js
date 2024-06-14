@@ -7,7 +7,7 @@ let tasks = []
 try {
     tasks = JSON.parse(fs.readFileSync( __dirname + '/data/task_data.json', 'utf8'))
 } catch (error) {
-    console.error('Error reading data', err)
+    console.error('Error reading data', error)
 }
 
 const getNextId = () => {
@@ -19,7 +19,7 @@ const getNextId = () => {
 }
 
 router.get('/', (req, res) => {
-    const id = req.query.id
+    const id = parseInt(req.query.id, 10)
 
     if (!tasks) {
         return res.status(500).send('Internal server error')
@@ -37,14 +37,15 @@ router.post('/', (req, res) => {
     if (!newTask.Titel || !newTask.Beschreibung || !newTask.DueDate || !newTask.ResolvedDate){
         return res.status(406).send('All fields must be filled')
     }
+    const taskId = getNextId()
+    const taskFormatId = {Id: taskId, ...newTask} 
 
-    newTask.Id = getNextId()
-    tasks.push(newTask)
+    tasks.push(taskFormatId)
     try {
-        fs.writeFileSync(__dirname + '/data/task_data.json')
+        fs.writeFileSync(__dirname + '/data/task_data.json', JSON.stringify(tasks, null, 2))
         res.status(201).send(`${newTask.Titel} has been added`)
     } catch (error) {
-        res.status(500).send('Error while writing tasks', error)
+        res.status(500).send('Error while writing tasks')
     }
 })
 

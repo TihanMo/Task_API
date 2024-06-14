@@ -46,9 +46,10 @@ app.post('/login', (req, res) => {
 
     if (user) {
         req.session.user = email
-        res.status(201).send('Login successful')
+        console.log(`User logged in: ${req.session.user}`)
+        res.status(201).json({ message: 'Login successful' })
     } else {
-        res.status(401).send('Invalid email or password')
+        res.status(401).json({ error: 'Invalid email or password' })
     }
 })
 
@@ -56,9 +57,9 @@ app.get('/verify', (req, res) => {
     /*  #swagger.tags = ['User']
         #swagger.description = 'Endpoint to verify if the user is logged in.' */
     if (req.session.user != null) {
-        res.status(200).send(`User ${req.session.user} is logged in`)
+        res.status(200).json({ message: `User ${req.session.user} is logged in` })
     } else {
-        res.status(200).send('User not logged in')
+        res.status(200).json({ message: 'User not logged in' })
     }
 })
 

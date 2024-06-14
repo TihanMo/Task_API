@@ -19,6 +19,7 @@ const getNextId = () => {
     }
 }
 
+/*
 const userAuth = (req, res, next) => {
     console.log('User in session:', req.session.user)
     if (req.session.user == null) {
@@ -26,10 +27,12 @@ const userAuth = (req, res, next) => {
     }
     next()
 }
+*/
 
-
-router.get('/', userAuth, (req, res) => {
-
+router.get('/', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+    }
     const id = parseInt(req.query.id)
 
     if (!tasks) {
@@ -42,7 +45,10 @@ router.get('/', userAuth, (req, res) => {
     res.status(200).json(tasks)
 })
 
-router.get('/:id', userAuth, (req, res) => {
+router.get('/:id', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+    }
     const id = parseInt(req.params.id)
     const task = tasks.find(t => t.Id === id)
 
@@ -53,7 +59,11 @@ router.get('/:id', userAuth, (req, res) => {
     }
 })
 
-router.post('/', userAuth, (req, res) => {
+router.post('/', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+
+    }
     const newTask = req.body
 
     if (!newTask.Titel || !newTask.Beschreibung || !newTask.DueDate || !newTask.ResolvedDate) {
@@ -71,7 +81,10 @@ router.post('/', userAuth, (req, res) => {
     }
 })
 
-router.put('/:id', userAuth, (req, res) => {
+router.put('/:id', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+    }
     const updatedTask = req.body
     const id = parseInt(req.params.id)
 
@@ -95,7 +108,10 @@ router.put('/:id', userAuth, (req, res) => {
     }
 })
 
-router.patch('/:id', userAuth, (req, res) => {
+router.patch('/:id', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+    }
     const id = parseInt(req.params.id)
     const updatedFields = req.body
     const taskIndex = tasks.findIndex(t => t.Id === id)
@@ -115,7 +131,10 @@ router.patch('/:id', userAuth, (req, res) => {
     }
 })
 
-router.delete('/:id', userAuth, (req, res) => {
+router.delete('/:id', (req, res) => {
+    if (req.session.user == null) {
+        return res.status(403).json({ error: 'Forbidden: User not authenticated' })
+    }
     const id = parseInt(req.params.id)
 
     if (!id) {

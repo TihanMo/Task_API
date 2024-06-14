@@ -11,11 +11,12 @@ try {
 }
 
 const getNextId = () => {
-    if (tasks.length === 0) {
-        return 1
-    }
     const ids = tasks.map(task => task.Id)
-    return Math.max(...ids) + 1
+    for (let i = 1; i <= ids.length + 1; i++) {
+        if (!ids.includes(i)) {
+            return i
+        }
+    }
 }
 
 router.get('/', (req, res) => {
@@ -29,6 +30,17 @@ router.get('/', (req, res) => {
         return res.status(200).send(task)
     }
     res.status(200).json(tasks)
+})
+
+router.get('/:id', (req, res) => {
+    const id = parseInt(req.params.id, 10)
+    const task = tasks.find(t => t.Id === id)
+
+    if(task){
+        res.status(200).send(task)
+    } else {
+        res.status(404).send('Task not found')
+    }
 })
 
 router.post('/', (req, res) => {
@@ -47,6 +59,18 @@ router.post('/', (req, res) => {
     } catch (error) {
         res.status(500).send('Error while writing tasks')
     }
+})
+
+router.put('/', (req, res) => {
+
+})
+
+router.patch('/', (req, res) => {
+    
+})
+
+router.delete('/', (req, res) => {
+    
 })
 
 module.exports = router

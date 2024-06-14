@@ -79,8 +79,8 @@ router.post('/', (req, res) => {
     }
     const newTask = req.body
 
-    if (!newTask.Titel || !newTask.Beschreibung || !newTask.DueDate || !newTask.ResolvedDate) {
-        return res.status(406).json({error: 'All fields must be filled'})
+    if (!newTask.Titel || !newTask.Beschreibung || !newTask.DueDate) {
+        return res.status(422).json({error: 'All fields must be filled'})
     }
     const taskId = getNextId()
     const taskFormatId = { Id: taskId, ...newTask }

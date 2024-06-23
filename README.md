@@ -33,7 +33,7 @@ npm i
 
 * `/Task_API` This is the project root folder. Here you can also find all the config files and any other files that are needed for the project
   * `/src` This is the source folder of the API. It contains the main implementation of the application, as well as the swagger documentation and Data.
-  * `/data`This folder contains all the Task Data in the file `task_data.json`
+    * `/data`This folder contains all the Task Data in the file `task_data.json`
     * `server.js` This is the main codebase for the API. It contains Routing and User handling etc. 
     * `task-routes.js` This is the router for all `/tasks` routes
 
